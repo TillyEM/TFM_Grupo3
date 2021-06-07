@@ -1,12 +1,13 @@
 from ..data.make_dataset import make_dataset
 from ..evaluation.evaluate_model import evaluate_model
 from app import ROOT_DIR, cos, client
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from cloudant.query import Query
+import pickle
 import time
 
 
-def training_pipeline(path, model_info_db_name='models-db'):
+def training_pipeline(path, model_info_db_name='proyecto_tfm'):
     """
         Función para gestionar el pipeline completo de entrenamiento
         del modelo.
@@ -50,11 +51,8 @@ def training_pipeline(path, model_info_db_name='models-db'):
     indDes, gen,exprel, uni, educ, exp, tam, tipo, ultNT, horas)
 
 
-    # definición del modelo (Random Forest)
-    model = RandomForestClassifier(n_estimators=model_config['n_estimators'],
-                                   max_features=model_config['max_features'],
-                                   random_state=50,
-                                   n_jobs=-1)
+    # definición del modelo (GradientBoostingClassifier)
+    model = GradientBoostingClassifier(criterion= 'mse', learning_rate= 0.05, max_depth= 6, n_estimators= 200)
 
     print('---> Training a model with the following configuration:')
     print(model_config)

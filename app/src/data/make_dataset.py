@@ -8,7 +8,6 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 import numpy as np
 from sklearn.model_selection import train_test_split
-from ..features.feature_engineering import feature_engineering
 from app import cos
 
 
